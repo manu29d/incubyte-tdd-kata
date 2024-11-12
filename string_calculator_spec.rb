@@ -12,4 +12,16 @@ describe StringCalculator do
       expect(subject.add(empty_string)).must_equal 0
     end
   end
+
+  describe 'when input string is simple' do
+    describe 'when only 1 number is given' do
+      it 'should return the number' do
+        expect(subject.add('1')).must_equal 1
+      end
+    end
+
+    it 'should return the correct addition result' do
+      expect(subject.add(simple_string)).must_equal 6
+    end
+  end
 end
