@@ -23,5 +23,13 @@ describe StringCalculator do
     it 'should return the correct addition result' do
       expect(subject.add(simple_string)).must_equal 6
     end
+
+  describe 'when input string contains newlines' do
+    it 'should return the correct addition result' do
+      expect(subject.add('1\n2,3')).must_equal 6
+      expect(subject.add('\n2,3')).must_equal 5
+      expect(subject.add('1,2\n')).must_equal 3
+      expect(subject.add('3\n\n4\n')).must_equal 7
+    end
   end
 end
