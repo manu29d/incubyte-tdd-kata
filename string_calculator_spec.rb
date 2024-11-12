@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative './string_calculator.rb'
+require_relative './string_calculator'
 
 describe StringCalculator do
   subject { StringCalculator.new }
