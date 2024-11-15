@@ -6,7 +6,10 @@ class StringCalculator
   def add(input_string)
     return 0 if input_string.empty?
 
-    input_string = input_string.gsub('\n', ',')
+    custom_delimiter = input_string.match(%r{//(.*)\\n\d+})
+    input_string.gsub!(custom_delimiter[1], ',') if custom_delimiter
+
+    input_string.gsub!('\n', ',')
     input_string.split(',').map(&:to_i).reduce(:+)
   end
 end

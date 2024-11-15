@@ -38,4 +38,12 @@ describe StringCalculator do
       expect(subject.add('3\n\n4\n-2')).must_equal 5
     end
   end
+
+  describe 'when input string contains custom delimiters' do
+    let(:complex_string) { '//;\n1;2;3' }
+
+    it 'should return the correct addition result' do
+      expect(subject.add(complex_string)).must_equal 6
+    end
+  end
 end
