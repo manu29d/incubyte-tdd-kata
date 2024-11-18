@@ -18,7 +18,7 @@ This project implements a string calculator that processes comma-separated numbe
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/manu29d/incubyte-tdd-kata/
+git clone https://github.com/manu29d/incubyte-tdd-kata.git
 cd incubyte-tdd-kata
 ```
 
