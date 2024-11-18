@@ -6,10 +6,18 @@ class StringCalculator
   def add(input_string)
     return 0 if input_string.empty?
 
-    custom_delimiter = input_string.match(%r{//(.*)\\n\d+})
-    input_string.gsub!(custom_delimiter[1], ',') if custom_delimiter
+    delimiter_regex = %r{^//([^\\n]+)\\n}
+    input_string.match(delimiter_regex)
+    input_string.gsub!(delimiter_regex, '')
 
-    input_string.gsub!('\n', ',')
-    input_string.split(',').map(&:to_i).reduce(:+)
+    delimiter = ::Regexp.last_match(1) || ','
+
+    input_string.gsub!('\n', delimiter)
+    numbers = input_string.split(delimiter).map(&:to_i)
+    negative_numbers = numbers.select(&:negative?)
+
+    raise(ArgumentError, "negative numbers not allowed #{negative_numbers.join(',')}") unless negative_numbers.empty?
+
+    numbers.reduce(:+)
   end
 end

@@ -23,10 +23,6 @@ describe StringCalculator do
     it 'should return the correct addition result' do
       expect(subject.add(simple_string)).must_equal 6
     end
-
-    it 'should handle negative numbers' do
-      expect(subject.add('1,-1,2')).must_equal 2
-    end
   end
 
   describe 'when input string contains newlines' do
@@ -35,7 +31,6 @@ describe StringCalculator do
       expect(subject.add('\n2,3')).must_equal 5
       expect(subject.add('1,2\n')).must_equal 3
       expect(subject.add('3\n\n4\n')).must_equal 7
-      expect(subject.add('3\n\n4\n-2')).must_equal 5
     end
   end
 
@@ -44,6 +39,16 @@ describe StringCalculator do
 
     it 'should return the correct addition result' do
       expect(subject.add(complex_string)).must_equal 6
+    end
+  end
+
+  describe 'when input string contains negative numbers' do
+    let(:invalid_string) { '-1,3' }
+    let(:invalid_complex_string) { '//;\n1;-2;-3;4' }
+
+    it 'should raise error' do
+      expect { subject.add(invalid_string) }.must_raise ArgumentError, 'negative numbers not allowed -1'
+      expect { subject.add(invalid_complex_string) }.must_raise ArgumentError, 'negative numbers not allowed -2,-3'
     end
   end
 end
